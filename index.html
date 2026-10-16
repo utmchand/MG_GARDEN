@@ -24,6 +24,18 @@
             color: var(--text-color);
             background-color: var(--bg-light);
             line-height: 1.6;
+            
+            /* टेक्स्ट सेलेक्ट और कॉपी करने से रोकने के लिए */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* फॉर्म इनपुट को टाइप करने के लिए चालू रखा गया है */
+        input, textarea, select {
+            -webkit-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
         }
 
         /* Navigation */
@@ -58,16 +70,15 @@
             color: #d8f3dc;
         }
 
-        /* Hero Section (Updated: Height removed, Padding reduced) */
+        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558904541-efa843a96f09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            /* height: 60vh; <-- Ise hata diya gaya hai */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px; /* Padding kam kar di gayi hai */
+            padding: 40px 20px;
         }
 
         .hero h1 {
@@ -295,7 +306,6 @@
                 display: none; 
             }
             .hero h1 { font-size: 3rem; }
-            /* .hero { height: 50vh; } <-- Mobile view se bhi height hata di gayi hai */
         }
     </style>
 </head>
@@ -455,8 +465,41 @@
         <p>Developed for Indore, Ujjain & Central India</p>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Security Script -->
     <script>
+        // 1. Disable Right Click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 2. Disable Copy, Cut, Paste
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('cut', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
+
+        // 3. Disable Keyboard Shortcuts (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+        document.onkeydown = function(e) {
+            // F12 key
+            if(e.keyCode == 123) {
+                return false;
+            }
+            // Ctrl+Shift+I (Inspect)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+Shift+C (Inspect)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+Shift+J (Console)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+U (View Source)
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        };
+
+        // WhatsApp Message Function
         function sendToWhatsApp(event) {
             event.preventDefault(); 
 
@@ -478,6 +521,7 @@
             window.open(whatsapp_url, '_blank');
         }
 
+        // Image Popup Function
         function openImage(src) {
             const modal = document.createElement('div');
             modal.style.position = 'fixed';
