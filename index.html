@@ -58,25 +58,25 @@
             color: #d8f3dc;
         }
 
-        /* Hero Section (Updated) */
+        /* Hero Section (Updated: Height removed, Padding reduced) */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558904541-efa843a96f09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            height: 60vh; /* ऊँचाई कम की गई है */
+            /* height: 60vh; <-- Ise hata diya gaya hai */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 40px 20px; /* Padding kam kar di gayi hai */
         }
 
         .hero h1 {
             font-size: 4.5rem;
             margin-bottom: 10px;
-            color: #d8f3dc; /* प्रकृति से जुड़ा हल्का हरा रंग */
-            font-family: 'Georgia', serif; /* आकर्षक फॉन्ट */
+            color: #d8f3dc; 
+            font-family: 'Georgia', serif; 
             letter-spacing: 3px;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9); /* टेक्स्ट को उभरने के लिए शैडो */
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9); 
         }
 
         .hero p {
@@ -209,15 +209,15 @@
             border-radius: 5px;
         }
 
-        /* Brochure/Catalog (Updated) */
+        /* Brochure/Catalog */
         .download-section {
             text-align: center;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 30px 20px; /* पैडिंग कम की गई है */
+            padding: 30px 20px; 
             border-radius: 12px;
             margin: 20px auto;
-            max-width: 800px; /* बॉक्स को छोटा किया गया है */
+            max-width: 800px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
@@ -295,7 +295,7 @@
                 display: none; 
             }
             .hero h1 { font-size: 3rem; }
-            .hero { height: 50vh; }
+            /* .hero { height: 50vh; } <-- Mobile view se bhi height hata di gayi hai */
         }
     </style>
 </head>
@@ -391,7 +391,7 @@
         </div>
     </section>
 
-    <!-- Brochure & Catalog Section (Updated) -->
+    <!-- Brochure & Catalog Section -->
     <section id="brochure" style="padding-top: 20px; padding-bottom: 20px;">
         <div class="download-section">
             <h2>Brochure & Catalog</h2>
@@ -417,18 +417,15 @@
             </div>
             <div class="contact-info">
                 <h3>Get In Touch</h3>
-                <!-- Updated Form for WhatsApp -->
                 <form onsubmit="sendToWhatsApp(event)" style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
                     
                     <input type="text" id="wa_name" class="form-input" placeholder="Your Name (आपका नाम)" required>
                     
-                    <!-- Country Code & Phone Number Box -->
                     <div style="display: flex; gap: 10px;">
                         <select id="country_code" class="form-input" style="width: 100px; cursor: pointer;">
                             <option value="+91" selected>+91 (IND)</option>
                         </select>
                         
-                        <!-- Added attributes to strictly allow only 10 numbers -->
                         <input type="text" id="wa_phone" class="form-input" style="flex: 1;" 
                                placeholder="10 Digit Mobile No." required 
                                maxlength="10" minlength="10" pattern="\d{10}" 
@@ -436,7 +433,6 @@
                                title="कृपया केवल 10 अंकों का मोबाइल नंबर दर्ज करें">
                     </div>
                     
-                    <!-- Dropdown for selecting contact number -->
                     <select id="wa_target" class="form-input" required style="cursor: pointer;">
                         <option value="" disabled selected>आप किसे मैसेज भेजना चाहते हैं? (Select Contact)</option>
                         <option value="917898128162">CEO - 7898128162</option>
@@ -460,7 +456,6 @@
 
     <!-- JavaScript -->
     <script>
-        // WhatsApp Message Function
         function sendToWhatsApp(event) {
             event.preventDefault(); 
 
@@ -470,7 +465,6 @@
             var targetNumber = document.getElementById('wa_target').value;
             var message = document.getElementById('wa_message').value;
             
-            // Country Code + Phone
             var fullPhone = countryCode + " " + phone;
             
             var final_message = "नमस्ते MG GARDEN, मुझे एक इंक्वायरी करनी है:%0A%0A" + 
@@ -483,7 +477,6 @@
             window.open(whatsapp_url, '_blank');
         }
 
-        // Image Popup Function
         function openImage(src) {
             const modal = document.createElement('div');
             modal.style.position = 'fixed';
