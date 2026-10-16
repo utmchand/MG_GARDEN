@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MG Garden - Garden Developers & Consultant</title>
+    <style>
+        /* CSS Styling */
+        :root {
+            --primary-color: #2d6a4f;
+            --secondary-color: #40916c;
+            --text-color: #333;
+            --bg-light: #f4f9f4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d8f3dc;
+        }
+
+        /* Hero Section (Updated) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558904541-efa843a96f09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 60vh; /* ऊँचाई कम की गई है */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            color: #d8f3dc; /* प्रकृति से जुड़ा हल्का हरा रंग */
+            font-family: 'Georgia', serif; /* आकर्षक फॉन्ट */
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9); /* टेक्स्ट को उभरने के लिए शैडो */
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #f4f9f4;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            background-color: #1b4332;
+            transform: scale(1.05);
+        }
+
+        /* Sections General */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--secondary-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Before & After Section */
+        .ba-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .ba-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .ba-images {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ba-images div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .ba-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        /* Brochure/Catalog (Updated) */
+        .download-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 20px; /* पैडिंग कम की गई है */
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 800px; /* बॉक्स को छोटा किया गया है */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .download-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .download-section h2::after {
+            background-color: white;
+        }
+
+        .download-section .btn {
+            background-color: white;
+            color: var(--primary-color);
+            margin: 10px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .download-section .btn:hover {
+            background-color: #f4f9f4;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        /* Form Inputs */
+        .form-input {
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(45, 106, 79, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1b4332;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+            }
+            .hero h1 { font-size: 3rem; }
+            .hero { height: 50vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">MG GARDEN</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#before-after">Before/After</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>MG GARDEN</h1>
+        <p>Expert Garden Developers & Consultants</p>
+        <a href="#contact" class="btn">Get a Free Consultation</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>हमारी सेवाएँ (Our Services)</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Garden Development</h3>
+                <p>नए गार्डन की रूपरेखा तैयार करना और 2D/3D लेआउट मॉडलिंग के जरिए आपका सपनों का गार्डन बनाना।</p>
+            </div>
+            <div class="service-card">
+                <h3>Garden Maintenance</h3>
+                <p>गार्डन की नियमित देखभाल, कटाई-छंटाई, खाद डालना और पौधों को स्वस्थ रखना।</p>
+            </div>
+            <div class="service-card">
+                <h3>Site Preparation & Lawn</h3>
+                <p>जमीन तैयार करना, मिट्टी का उपचार और उच्च गुणवत्ता वाले लॉन (Lawn) का इंस्टॉलेशन।</p>
+            </div>
+            <div class="service-card">
+                <h3>Plant Selection</h3>
+                <p>जगह और मौसम के अनुकूल बेहतरीन पौधों और पेड़ों का चयन व रोपण।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before & After Section -->
+    <section id="before-after" style="background-color: white;">
+        <h2>काम से पहले और बाद (Before & After)</h2>
+        <div class="ba-container">
+            <!-- Project 1 -->
+            <div class="ba-card">
+                <h3 style="text-align: center; margin-bottom: 10px; color: var(--secondary-color);">Commercial Landscape</h3>
+                <div class="ba-images">
+                    <div>
+                        <img src="before.jpeg" alt="Before">
+                        <p><strong>Before</strong></p>
+                    </div>
+                    <div>
+                        <img src="after.jpeg" alt="After">
+                        <p><strong>After</strong></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="ba-card">
+                <h3 style="text-align: center; margin-bottom: 10px; color: var(--secondary-color);">Lawn Installation</h3>
+                <div class="ba-images">
+                    <div>
+                        <img src="before1.jpeg" alt="Before">
+                        <p><strong>Before</strong></p>
+                    </div>
+                    <div>
+                        <img src="after1.jpeg" alt="After">
+                        <p><strong>After</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>फोटो गैलरी (Photo Gallery)</h2>
+        <div class="gallery-grid">
+            <img src="gal.jpeg" alt="Garden 1" onclick="openImage(this.src)">
+            <img src="gal1.jpeg" alt="Garden 2" onclick="openImage(this.src)">
+            <img src="gal2.jpeg" alt="Garden 3" onclick="openImage(this.src)">
+            <img src="gal3.jpeg" alt="Garden 4" onclick="openImage(this.src)">
+            <img src="gal4.jpeg" alt="Garden 5" onclick="openImage(this.src)">
+            <img src="gal5.jpeg" alt="Garden 6" onclick="openImage(this.src)">
+        </div>
+    </section>
+
+    <!-- Brochure & Catalog Section (Updated) -->
+    <section id="brochure" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="download-section">
+            <h2>Brochure & Catalog</h2>
+            <p>हमारी सभी सेवाओं और प्रोजेक्ट्स की विस्तृत जानकारी के लिए ब्रोशर और कैटलॉग डाउनलोड करें।</p>
+            <br>
+            <a href="MG_Brochure.pdf" class="btn">📄 Download Brochure</a>
+            <a href="MG_Catalog.pdf" class="btn">📗 Download Catalog</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>संपर्क करें (Contact Us)</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>MG GARDEN</h3>
+                <p>Garden Developers and Consultant</p>
+                <br>
+                <p><strong>📍 Address:</strong> BHESLAY, TIHI FATA RAU, PEETHAMPUR ROAD</p>
+                <p><strong>📞 CEO Mob:</strong> +91 7898128162, +91 9827221698</p>
+                <p><strong>📞 HR Mob:</strong> +91 9977992260</p>
+                <p><strong>✉️ Email:</strong> <a href="mailto:mggardendm@gmail.com" style="color: var(--primary-color); text-decoration: none;">mggardendm@gmail.com</a></p>
+            </div>
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <!-- Updated Form for WhatsApp -->
+                <form onsubmit="sendToWhatsApp(event)" style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                    
+                    <input type="text" id="wa_name" class="form-input" placeholder="Your Name (आपका नाम)" required>
+                    
+                    <!-- Country Code & Phone Number Box -->
+                    <div style="display: flex; gap: 10px;">
+                        <select id="country_code" class="form-input" style="width: 100px; cursor: pointer;">
+                            <option value="+91" selected>+91 (IND)</option>
+                        </select>
+                        
+                        <!-- Added attributes to strictly allow only 10 numbers -->
+                        <input type="text" id="wa_phone" class="form-input" style="flex: 1;" 
+                               placeholder="10 Digit Mobile No." required 
+                               maxlength="10" minlength="10" pattern="\d{10}" 
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                               title="कृपया केवल 10 अंकों का मोबाइल नंबर दर्ज करें">
+                    </div>
+                    
+                    <!-- Dropdown for selecting contact number -->
+                    <select id="wa_target" class="form-input" required style="cursor: pointer;">
+                        <option value="" disabled selected>आप किसे मैसेज भेजना चाहते हैं? (Select Contact)</option>
+                        <option value="917898128162">CEO - 7898128162</option>
+                        <option value="919827221698">CEO - 9827221698</option>
+                        <option value="919977992260">HR - 9977992260</option>
+                    </select>
+
+                    <textarea id="wa_message" class="form-input" placeholder="Your Requirement / Message" rows="4" required></textarea>
+                    
+                    <button type="submit" class="btn" style="border: none; cursor: pointer; background-color: #25D366; color: white;">Send via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 MG Garden - All Rights Reserved.</p>
+        <p>Developed for Indore, Ujjain & Central India</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // WhatsApp Message Function
+        function sendToWhatsApp(event) {
+            event.preventDefault(); 
+
+            var name = document.getElementById('wa_name').value;
+            var countryCode = document.getElementById('country_code').value;
+            var phone = document.getElementById('wa_phone').value;
+            var targetNumber = document.getElementById('wa_target').value;
+            var message = document.getElementById('wa_message').value;
+            
+            // Country Code + Phone
+            var fullPhone = countryCode + " " + phone;
+            
+            var final_message = "नमस्ते MG GARDEN, मुझे एक इंक्वायरी करनी है:%0A%0A" + 
+                                "*नाम:* " + name + "%0A" + 
+                                "*मोबाइल:* " + fullPhone + "%0A" + 
+                                "*मैसेज:* " + message;
+                                
+            var whatsapp_url = "https://wa.me/" + targetNumber + "?text=" + final_message;
+            
+            window.open(whatsapp_url, '_blank');
+        }
+
+        // Image Popup Function
+        function openImage(src) {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '2000';
+            modal.style.cursor = 'pointer';
+            
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.maxWidth = '90%';
+            img.style.maxHeight = '90%';
+            img.style.borderRadius = '10px';
+            
+            modal.appendChild(img);
+            document.body.appendChild(modal);
+            
+            modal.onclick = function() {
+                document.body.removeChild(modal);
+            }
+        }
+    </script>
+</body>
+</html>
